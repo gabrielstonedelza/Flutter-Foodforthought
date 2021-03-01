@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:toast/toast.dart';
-
-
 class NewMemberPage extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
@@ -13,7 +10,6 @@ class NewMemberPage extends StatefulWidget{
   }
 }
 
-
 class _NewMemberPageState extends State<NewMemberPage> with AutomaticKeepAliveClientMixin{
 
 
@@ -21,6 +17,18 @@ class _NewMemberPageState extends State<NewMemberPage> with AutomaticKeepAliveCl
   TextEditingController _nameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   var name;
+
+  List allMembers = [];
+  bool _isMember = false;
+
+  _chechMember() async{
+    final url = "http://157.230.214.75/api/members/";
+    final response = await http.get(url);
+    if(response.statusCode == 200){
+      var jsonData = json.decode(response.body);
+
+    }
+  }
 
   _becomeMember() async{
     await http.post("http://157.230.214.75/api/members/",
@@ -31,6 +39,12 @@ class _NewMemberPageState extends State<NewMemberPage> with AutomaticKeepAliveCl
     Navigator.of(context).pushNamedAndRemoveUntil('/members', ModalRoute.withName('/becomeMember'));
   }
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _chechMember();
+  }
 
   @override
   Widget build(BuildContext context) {
