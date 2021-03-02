@@ -74,6 +74,11 @@ class _ThoughtState extends State<Thoughts>{
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Card(
+                  shadowColor: Colors.white,
+                  elevation: 10,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0)
+                  ),
                   child: ListTile(
                     title: Text(thoughts['title'],style: TextStyle(fontSize: 16),),
                     subtitle: Row(

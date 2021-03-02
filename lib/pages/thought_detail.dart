@@ -7,7 +7,7 @@ import 'mydrawer.dart';
 
 class ThoughtDetail extends StatefulWidget{
   String detailTitle;
-  int detailId;
+  var detailId;
   ThoughtDetail(this.detailTitle,this.detailId);
   @override
   State<StatefulWidget> createState() {
@@ -18,7 +18,7 @@ class ThoughtDetail extends StatefulWidget{
 
 class _ThoughtDetailState extends State<ThoughtDetail>{
   String detailTitle;
-  int detailId;
+  var detailId;
   _ThoughtDetailState(this.detailTitle,this.detailId);
 
   bool isLoading = true;
@@ -33,24 +33,6 @@ class _ThoughtDetailState extends State<ThoughtDetail>{
   IconData playBtn = Icons.play_circle_fill_outlined;
   List comments = [];
   int likesCount = 0;
-
-
-
-  _fetchComment() async{
-    final commentUrl = "http://157.230.214.75/api/comments/";
-    final commentResponse = await http.get(commentUrl);
-    if(commentResponse.statusCode == 200){
-      var postComments = json.decode(commentResponse.body);
-      comments = postComments;
-      comments.forEach((element) {
-        if(element['post'] == detailId){
-          print(element['comment']);
-        }
-
-      });
-
-    }
-  }
 
   _fetchData() async{
     final url = "http://157.230.214.75/api/thoughtlist/$detailId";
@@ -68,23 +50,6 @@ class _ThoughtDetailState extends State<ThoughtDetail>{
     });
   }
 
-  _addLike() async{
-    final url = "http://157.230.214.75/api/thoughtlist/$detailId";
-    final response = await http.get(url);
-    if(response.statusCode == 200){
-      var jsonData = json.decode(response.body);
-      setState(() {
-        print(jsonData['likes']);
-        likesCount++;
-      });
-      print(likesCount);
-      await http.put("http://157.230.214.75/api/thoughtlist/$detailId",
-          body: {"likes": likesCount,},
-          headers: {"Content-Type": "application/x-www-form-urlencoded"}
-      );
-    }
-  }
-
   _playAudio() async{
     await audioPlayer.play(audioFile);
   }
@@ -98,8 +63,6 @@ class _ThoughtDetailState extends State<ThoughtDetail>{
     // TODO: implement initState
     setState(() {
       _fetchData();
-      _fetchComment();
-      _addLike();
     });
     super.initState();
   }
@@ -129,8 +92,6 @@ class _ThoughtDetailState extends State<ThoughtDetail>{
                     isLoading = true;
                   });
                   _fetchData();
-                  _fetchComment();
-                  _addLike();
                 },
               )
             ],
@@ -197,33 +158,17 @@ class _ThoughtDetailState extends State<ThoughtDetail>{
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text("Comments"),
+                      child: Text("Comments",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),),
                     )
                   ],
                 ),
-                Row(
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.favorite),
-                      onPressed: (){
-                        _addLike();
-                      },
-                    ),
-                    Text("$likesCount"),
-                    IconButton(
-                      icon: Icon(Icons.insert_comment_outlined),
-                      onPressed: (){
-                        _addLike();
-                      },
-                    ),
-                    // IconButton(),
-                  ],
-                ),
+
                 SizedBox(height: 35,),
               ])
           )
         ],
       ),
+
     );
   }
 

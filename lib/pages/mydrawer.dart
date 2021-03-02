@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodforthought/pages/about.dart';
+import 'package:foodforthought/pages/comments.dart';
 import 'package:foodforthought/pages/members.dart';
 import 'package:foodforthought/pages/thoughttoday.dart';
 import 'package:foodforthought/pages/thoughts.dart';
@@ -29,6 +30,7 @@ class MyDrawer extends StatelessWidget{
               }));
             },
           ),
+
           ListTile(
             leading: Icon(Icons.lightbulb_outline_rounded),
             title: Text("Thoughts",style: TextStyle(fontWeight: FontWeight.bold),),
@@ -46,6 +48,16 @@ class MyDrawer extends StatelessWidget{
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context){
                   return Members();
+                }));
+              }
+          ),
+          ListTile(
+              leading: Icon(Icons.comment),
+              title: Text("Comments",style: TextStyle(fontWeight: FontWeight.bold),),
+              subtitle: Text("Feedbacks"),
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context){
+                  return Comments();
                 }));
               }
           ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodforthought/constants.dart';
 import 'package:foodforthought/pages/about.dart';
+import 'package:foodforthought/pages/comments.dart';
+import 'package:foodforthought/pages/commentsandadd.dart';
 import 'package:foodforthought/pages/members.dart';
 import 'package:foodforthought/pages/newmember.dart';
 import 'package:foodforthought/pages/thoughttoday.dart';
@@ -12,6 +14,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+
+  MyApp();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -29,7 +33,9 @@ class MyApp extends StatelessWidget {
         '/thoughts': (BuildContext context) => Thoughts(),
         '/members': (BuildContext context) => Members(),
         '/becomeMember': (BuildContext context) => NewMemberPage(),
-        '/aboutus': (BuildContext context) => AboutUs()
+        '/aboutus': (BuildContext context) => AboutUs(),
+        '/comments': (BuildContext context) => Comments(),
+        '/commentsadd': (BuildContext context) => CommentsAddPage()
       },
     );
   }

@@ -34,6 +34,8 @@ dependencies:
   connectivity: ^0.4.2
   flutter_svg_provider: ^0.1.8
   url_launcher: ^5.7.10
+  emoji_picker: ^0.1.0
+  shared_preferences: ^0.5.12+4
 
 dev_dependencies:
   flutter_test:

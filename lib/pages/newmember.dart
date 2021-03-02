@@ -68,7 +68,6 @@ class _NewMemberPageState extends State<NewMemberPage> with AutomaticKeepAliveCl
           ),
           SliverList(
               delegate: SliverChildListDelegate([
-
                 Form(
                   key: _formKey,
                   child: Padding(
